@@ -1,8 +1,14 @@
 # Raspberry Pi Dashboard
 
-A dashboard for Raspberry Pi devices running Raspbian. Built with Flask on Python 3.
+A simple, lightweight system monitoring dashboard for Raspberry Pi devices running Raspbian.
 
 **ONLY Raspbian on Raspberry Pi is supported! You'll get errors if you run it another distro!**
+
+## Features
+- Simple and lightweight: less than 100KB and installs in less than a minute
+- Easily customizable: quickly add features and customize webpages (pull requests are always welcome!)
+- Monitor system resources (CPU, RAM, uptime, etc.)
+- View network information and running processes
 
 ## Run with a virtual environment
 
