@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+<h1>Log in</h1>
+<form method='POST'>
+<input name=_csrf_token type=hidden value="{{csrf_token()}}">
+<div class="form-group">
+<label for="username">Username: </label><br>
+<input type="text" class="form-control" id="username" name="username" required="true">
+</div>
+<div class="form-group">
+<label for="password">Password:</label>
+<input type="password" class="form-control" id="password" name="password" required="true">
+</div>
+<div class="form-group">
+<button type="submit" class="btn btn-primary">Log In</button>
+</div>
+</form>
+</div>
+{% endblock %}

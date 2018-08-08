@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+<h2>Status</h2>
+<a class="btn btn-secondary btn-sm" href="">Refresh</a>
+<div class="row">
+<div class="col-sm-6">
+<h5>CPU Usage</h5>
+<div class="progress">
+{% if info['cpu_percent'] >= 85 %}
+<div class="progress-bar bg-danger" role="progressbar" style="width: {{ info['cpu_percent'] }}%" 
+aria-valuenow="{{ info['cpu_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_percent'] }}%</div>
+{% elif info['cpu_percent'] >= 70 %}
+<div class="progress-bar bg-warning" role="progressbar" style="width: {{ info['cpu_percent'] }}%" 
+aria-valuenow="{{ info['cpu_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_percent'] }}%</div>
+{% else %}
+<div class="progress-bar bg-info" role="progressbar" style="width: {{ info['cpu_percent'] }}%" 
+aria-valuenow="{{ info['cpu_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_percent'] }}%</div>
+{% endif %}
+</div>
+{{ info['cpu_freq'] }}GHz / {{ info['cpu_max'] }}GHz
+</div>
+<div class="col-sm-6">
+<h5>CPU Temperature</h5>
+<div class="progress">
+{% if info['cpu_temp'] >= 85 %}
+<div class="progress-bar bg-danger" role="progressbar" style="width: {{ info['cpu_temp'] }}%" 
+aria-valuenow="{{ info['cpu_temp'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_temp'] }}'C</div>
+{% elif info['cpu_temp'] >= 70 %}
+<div class="progress-bar bg-warning" role="progressbar" style="width: {{ info['cpu_temp'] }}%" 
+aria-valuenow="{{ info['cpu_temp'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_temp'] }}'C</div>
+{% else %}
+<div class="progress-bar bg-info" role="progressbar" style="width: {{ info['cpu_temp'] }}%" 
+aria-valuenow="{{ info['cpu_temp'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_temp'] }}'C</div>
+{% endif %}
+</div>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-sm-6">
+<h5>Memory Usage</h5>
+<div class="progress">
+{% if info['ram_percent'] >= 85 %}
+<div class="progress-bar bg-danger" role="progressbar" style="width: {{ info['ram_percent'] }}%" 
+aria-valuenow="{{ info['ram_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['ram_percent'] }}%</div>
+{% elif info['ram_percent'] >= 70 %}
+<div class="progress-bar bg-warning" role="progressbar" style="width: {{ info['ram_percent'] }}%" 
+aria-valuenow="{{ info['ram_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['ram_percent'] }}%</div>
+{% else %}
+<div class="progress-bar bg-info" role="progressbar" style="width: {{ info['ram_percent'] }}%" 
+aria-valuenow="{{ info['ram_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['ram_percent'] }}%</div>
+{% endif %}
+</div>
+{{ info['ram_used'] }}/{{ info['ram_total'] }} MB
+</div>
+</div>
+<br>
+<div>
+<h5>Uptime</h5>
+System up since {{ info['up_since'] }} - {{ info['up_for'] }}
+</div>
+<hr>
+</div>
+
+<div class="container">
+<h2>Utilities</h2>
+<h4>Networking</h4>
+<p style="font-size:14pt">
+<a href="networking/nic-status/">Status</a><br>
+</p>
+<h4>System</h4>
+<p style="font-size:14pt">
+<a href="system/ps/">Processes</a><br>
+</p>             
+</div>
+{% endblock %}
