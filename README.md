@@ -5,12 +5,19 @@ A simple, lightweight system monitoring dashboard for Raspberry Pi devices runni
 **ONLY Raspbian on Raspberry Pi is supported! You'll get errors if you run it another distro!**
 
 ## Features
+
 - Simple and lightweight: less than 100KB and installs in less than a minute
 - Easily customizable: quickly add features and customize webpages (pull requests are always welcome!)
 - Monitor system resources (CPU, RAM, uptime, etc.)
 - View network information and running processes
 
-## Run with a virtual environment
+## Set up
+
+### Edit the config file
+
+Definitely change the default username, password, and secret key in `config.py` !
+
+### Run with a virtual environment
 
 Run the following on your Raspberry Pi
 
@@ -37,7 +44,7 @@ pip install -r requirements.txt
 gunicorn wsgi:app -b 0.0.0.0:58000
 ```
 
-## Run directly
+### Run directly
 
 This method is NOT RECOMMENDED, because running directly can make removing installed packages VERY difficult.
 
