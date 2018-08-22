@@ -1,4 +1,4 @@
-from flask import flash, render_template, session, redirect, request, make_response
+from flask import flash, render_template, session, redirect, request, make_response, url_for
 from wsgi import app
 from config import *
 import os
@@ -19,7 +19,7 @@ def logged_in():
 
 def to_login():
     flash('Please log in', 'info')
-    return redirect('/login/')
+    return redirect(URL_PREFIX+'/login/')
 
 
 # Login
@@ -54,7 +54,7 @@ def dashboard():
             'up_for': up_for,
             'cpu_temp': cpu_temp,
             }
-    return render_template('dashboard.html', HOSTNAME=HOSTNAME, info=info)
+    return render_template('dashboard.html', HOSTNAME=HOSTNAME, info=info, URL_PREFIX=URL_PREFIX, logged_in=logged_in())
 
 
 # Login
@@ -87,10 +87,10 @@ def login():
         if request.form['username'] == USERNAME and request.form['password'] == PASSWORD:
             session['logged_in'] = True
             flash('Welcome, '+USERNAME, 'success')
-            return redirect('/')
+            return redirect(URL_PREFIX+'/')
         else:
             flash('Invalid credentials!', 'danger')
-    return render_template('login.html', HOSTNAME=HOSTNAME)
+    return render_template('login.html', HOSTNAME=HOSTNAME, URL_PREFIX=URL_PREFIX, logged_in=logged_in())
 
 
 @app.route('/logout/')
@@ -98,4 +98,4 @@ def logout():
     if not logged_in():
         return to_login()
     session['logged_in'] = False
-    return render_template('logout.html', HOSTNAME=HOSTNAME)
+    return render_template('logout.html', HOSTNAME=HOSTNAME, URL_PREFIX=URL_PREFIX, logged_in=logged_in())
