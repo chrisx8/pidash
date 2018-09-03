@@ -17,6 +17,12 @@ A simple, lightweight system monitoring dashboard for Raspberry Pi devices runni
 
 Definitely change the default username, password, and secret key in `config.py` !
 
+### Add your current user to `video` group
+
+```bash
+sudo usermod -aG video $USER
+```
+
 ### Run with a virtual environment
 
 Run the following on your Raspberry Pi
@@ -27,6 +33,8 @@ git clone https://github.com/chrisx8/raspberrypi-dashboard.git
 cd raspberrypi-dashboard
 
 # Install pip before continuing
+sudo apt-get install python3-pip
+
 # Install virtualenv
 pip install --user virtualenv
 
@@ -44,20 +52,69 @@ pip install -r requirements.txt
 gunicorn wsgi:app -b 0.0.0.0:58000
 ```
 
-### Run directly
+## Advanced configuration
 
-This method is NOT RECOMMENDED, because running directly can make removing installed packages VERY difficult.
+### Automatically launch on startup with `supervisor`
 
-```bash
-# Clone project source from Git
-git clone https://github.com/chrisx8/raspberrypi-dashboard.git
-cd raspberrypi-dashboard
+- Step 1: Install supervisor
+    ```bash
+    sudo apt-get update
+    sudo apt-get install supervisor
+    ```
+- Step 2: Configure
 
-# Install pip before continuing
-# Install dependencies
-pip install --user -r requirements.txt
+    Edit `/etc/supervisor/conf.d/raspberrypi-dashboard.conf` with your favorite text editor (such as `nano` or `vi`)
 
-# Run server
-# Change 0.0.0.0:58000 to something else if you don't want the server on port 58000, or you don't want the server to be accessible from everywhere.
-gunicorn wsgi:app -b 0.0.0.0:58000
-```
+    Paste the following into the file:
+    ```
+    [program:raspberrypi-dashboard]
+    command=/path/to/raspberrypi-dashboard/venv/bin/gunicorn wsgi:app -b 0.0.0.0:58000
+    directory=/path/to/raspberrypi-dashboard
+    autostart=true
+    autorestart=true
+    startretries=3
+    user=<YOUR USERNAME>
+    group=<YOUR USERNAME>
+    stdout_logfile=NONE
+    stderr_logfile=NONE
+    ```
+- Step 3: Restart supervisor
+    ```bash
+    sudo supervisorctl reload
+    ```
+
+### Set up behind a Nginx reverse proxy
+
+- Step 1: Complete [supervisor setup](#Automatically-launch-on-startup-with-supervisor)
+- Step 2: Edit supervisor config
+    Edit `/etc/supervisor/conf.d/raspberrypi-dashboard.conf` with your favorite text editor (such as `nano` or `vi`)
+
+    Change the line starting with `command=` to:
+    ```
+    command=/path/to/raspberrypi-dashboard/venv/bin/gunicorn wsgi:app -b 127.0.0.1:58000
+    ```
+- Step 2: Install Nginx
+    ```bash
+    sudo apt-get update
+    sudo apt-get install nginx
+    ```
+- Step 3: Configure Nginx
+
+    Add the following into your Nginx server config:
+    ```
+    # Change the path to whatever you like
+    location /dashboard/ {
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $remote_addr;
+        proxy_set_header        X-Forwarded-Proto $scheme;
+        # This needs to match the path defined earlier!
+        proxy_set_header        Host $host/dashboard/;
+        proxy_intercept_errors  on;
+        proxy_pass http://127.0.0.1:58000/;
+    }
+    ```
+- Step 3: Restart supervisor and Nginx
+    ```bash
+    sudo supervisorctl reload
+    sudo systemctl restart nginx
+    ```
