@@ -85,7 +85,7 @@ gunicorn wsgi:app -b 0.0.0.0:58000
 
 ### Set up behind a Nginx reverse proxy
 
-- Step 1: Complete [supervisor setup](#Automatically-launch-on-startup-with-supervisor)
+- Step 1: Complete [supervisor setup](#automatically-launch-on-startup-with-supervisor)
 - Step 2: Edit supervisor config
     Edit `/etc/supervisor/conf.d/raspberrypi-dashboard.conf` with your favorite text editor (such as `nano` or `vi`)
 
