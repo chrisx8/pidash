@@ -2,7 +2,7 @@
 
 A simple, lightweight system monitoring dashboard for Raspberry Pi devices running Raspbian.
 
-**ONLY Raspbian on Raspberry Pi is supported! You'll get errors if you run it another distro!**
+**ONLY Raspbian on Raspberry Pi is supported! You'll get errors if you run it on another distro!**
 
 ## Features
 
