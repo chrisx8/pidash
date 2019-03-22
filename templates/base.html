@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>RasPi Dashboard</title>
+<title>PiDash</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="{{ URL_PREFIX }}/static/favicon.png">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
@@ -15,7 +15,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <a class="navbar-brand" href="{{ URL_PREFIX }}/">
 <img src="{{ URL_PREFIX }}/static/favicon.png" width="30" height="30" class="d-inline-block align-top" alt="">
-RasPi Dashboard
+PiDash
 </a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2"><span class="navbar-toggler-icon"></span></button>
 <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
@@ -31,7 +31,7 @@ RasPi Dashboard
 </nav>
 <div class="container" style="margin-top:20px">
 <div class="jumbotron">
-<h1 class="display-4">RasPi Dashboard</h1>
+<h1 class="display-4">PiDash</h1>
 <p class="lead">Hostname: {{ HOSTNAME }}</p>
 </div>
 {% for category, message in get_flashed_messages(with_categories=True) %}
