@@ -1,8 +1,24 @@
-# Raspberry Pi Dashboard
+# PiDash
 
-A simple, lightweight system monitoring dashboard for Raspberry Pi devices running Raspbian.
+A simple, lightweight system monitoring dashboard for Raspberry Pi.
 
 **ONLY Raspbian on Raspberry Pi is supported! You'll get errors if you run it on another distro!**
+
+![Screenshot](https://www.chrisx.xyz/uploads/pidash.png)
+
+## Table of Contents
+<!-- MarkdownTOC -->
+
+- [Features](#features)
+- [Set up](#set-up)
+    - [Edit the config file](#edit-the-config-file)
+    - [Add your current user to `video` group](#add-your-current-user-to-video-group)
+    - [Run with a virtual environment](#run-with-a-virtual-environment)
+- [Advanced configuration](#advanced-configuration)
+    - [Automatically launch on startup with `supervisor`](#automatically-launch-on-startup-with-supervisor)
+    - [Set up behind a Nginx reverse proxy](#set-up-behind-a-nginx-reverse-proxy)
+
+<!-- /MarkdownTOC -->
 
 ## Features
 
@@ -48,7 +64,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Run server
-# Change 0.0.0.0:58000 to something else if you don't want the server on port 58000, or you don't want the server to be accessible from everywhere.
+# Change 0.0.0.0:58000 to whereever you want PiDash to listen at
 gunicorn wsgi:app -b 0.0.0.0:58000
 ```
 
@@ -86,19 +102,13 @@ gunicorn wsgi:app -b 0.0.0.0:58000
 ### Set up behind a Nginx reverse proxy
 
 - Step 1: Complete [supervisor setup](#automatically-launch-on-startup-with-supervisor)
-- Step 2: Edit supervisor config
-    Edit `/etc/supervisor/conf.d/raspberrypi-dashboard.conf` with your favorite text editor (such as `nano` or `vi`)
-
-    Change the line starting with `command=` to:
-    ```
-    command=/path/to/raspberrypi-dashboard/venv/bin/gunicorn wsgi:app -b 127.0.0.1:58000
-    ```
-- Step 2: Install Nginx
+- Step 2: Make sure PiDash is listening at 127.0.0.1
+- Step 3: Install Nginx
     ```bash
     sudo apt-get update
     sudo apt-get install nginx
     ```
-- Step 3: Configure Nginx
+- Step 4: Configure Nginx
 
     Add the following into your Nginx server config:
     ```
@@ -110,7 +120,7 @@ gunicorn wsgi:app -b 0.0.0.0:58000
         # This needs to match the path defined earlier!
         proxy_set_header        Host $host/dashboard/;
         proxy_intercept_errors  on;
-        proxy_pass http://127.0.0.1:58000/;
+        proxy_pass http://127.0.0.1:58000/;  # Change 58000 to the port set in supervisor config
     }
     ```
 - Step 3: Restart supervisor and Nginx
