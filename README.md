@@ -4,7 +4,7 @@ A simple, lightweight system monitoring dashboard for Raspberry Pi.
 
 **ONLY Raspbian on Raspberry Pi is supported! You'll get errors if you run it on another distro!**
 
-![Screenshot](https://www.chrisx.xyz/uploads/pidash.png)
+![Screenshot](screenshot.png)
 
 ## Table of Contents
 <!-- MarkdownTOC -->
