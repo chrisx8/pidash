@@ -80,12 +80,13 @@ def ps_list():
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
+        # credentials correct
         if request.form['username'] == USERNAME and request.form['password'] == PASSWORD:
             session['logged_in'] = True
             flash('Welcome, '+USERNAME, 'success')
             return redirect(URL_PREFIX+'/')
-        else:
-            flash('Invalid credentials!', 'danger')
+        # bad credentials
+        flash('Invalid credentials!', 'danger')
     return render_template('login.html', HOSTNAME=HOSTNAME, URL_PREFIX=URL_PREFIX, logged_in=logged_in())
 
 
