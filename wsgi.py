@@ -1,23 +1,22 @@
 from flask import Flask, send_from_directory
 from flask_wtf.csrf import CSRFProtect
-from config import SECRET_KEY
 import os
+import secrets
+import string
 
 
-# SECRET KEY must be a nonempty string, and (hopefully) over 20 characters long
-def check_secret_key():
-    if not isinstance(SECRET_KEY, str):
-        raise TypeError("'SECRET_KEY' must be a string!")
-    elif SECRET_KEY == "":
-        raise ValueError("'SECRET_KEY' is empty!")
-    elif len(SECRET_KEY) < 20:
-        print("WARNING: SECRET_KEY is too short! Make it at least 20 characters long!")
+# create a random SECRET KEY
+def create_secret_key(length):
+    key = ""
+    characters = string.ascii_letters + string.digits + string.punctuation
+    for i in range(length):
+        key += secrets.choice(characters)
+    return key
 
 
 # Create app and load secret key
 app = Flask(__name__)
-check_secret_key()
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = create_secret_key(64)
 
 # initialize csrf protection
 csrf = CSRFProtect()

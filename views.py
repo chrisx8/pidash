@@ -1,13 +1,9 @@
 from flask import flash, render_template, session, redirect, request, make_response, url_for
 from wsgi import app
-from config import *
+from config import URL_PREFIX, USERNAME, PASSWORD
 import os
 
-# SET HOSTNAME
-if not isinstance(CUSTOM_HOSTNAME, str) or len(CUSTOM_HOSTNAME) == 0:
-    HOSTNAME = os.popen('cat /etc/hostname').read()
-else:
-    HOSTNAME = CUSTOM_HOSTNAME
+HOSTNAME = os.popen('/bin/cat /etc/hostname').read()
 
 
 def logged_in():
@@ -31,11 +27,11 @@ def dashboard():
     # cpu percentage
     cpu_percent = round(float(os.popen("grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}'").read()))
     # current cpu frequency
-    cpu_freq = round(float(os.popen("cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq").read())/1000000, 2)
+    cpu_freq = round(float(os.popen("/bin/cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq").read())/1000000, 2)
     # cpu max frequency
-    cpu_max = round(float(os.popen("cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq").read())/1000000, 2)
+    cpu_max = round(float(os.popen("/bin/cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq").read())/1000000, 2)
     # cpu temperature
-    cpu_temp = float(os.popen("vcgencmd measure_temp | grep -o \"[^=]*[^'C]\" | awk '{temp=$1} END {print temp}'").read())
+    cpu_temp = round(float(os.popen("/bin/cat /sys/class/thermal/thermal_zone0/temp").read())/1000)
     # total/free/used memory
     ram_total = round(int(os.popen("grep 'MemTotal: ' /proc/meminfo | awk '{total=$2} END {print total}'").read())/1000)
     ram_free = round(int(os.popen("grep 'MemFree: ' /proc/meminfo | awk '{free=$2} END {print free}'").read())/1000)

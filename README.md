@@ -1,21 +1,18 @@
-# PiDash
+# PiDash <!-- omit in toc -->
 
 A simple, lightweight system monitoring dashboard for Raspberry Pi.
 
-**ONLY Raspbian on Raspberry Pi is supported! You'll get errors if you run it on another distro!**
-
 ![Screenshot](screenshot.png)
 
-## Table of Contents
+## Table of Contents <!-- omit in toc -->
 
 - [Features](#features)
 - [Set up](#set-up)
-    - [Edit the config file](#edit-the-config-file)
-    - [Add your current user to `video` group](#add-your-current-user-to-video-group)
-    - [Run with a virtual environment](#run-with-a-virtual-environment)
+  - [Edit the config file](#edit-the-config-file)
+  - [Run with a virtual environment](#run-with-a-virtual-environment)
 - [Advanced configuration](#advanced-configuration)
-    - [Automatically launch on startup with `supervisor`](#automatically-launch-on-startup-with-supervisor)
-    - [Set up behind a Nginx reverse proxy](#set-up-behind-a-nginx-reverse-proxy)
+  - [Automatically launch on startup with `supervisor`](#automatically-launch-on-startup-with-supervisor)
+  - [Set up behind a Nginx reverse proxy](#set-up-behind-a-nginx-reverse-proxy)
 
 ## Features
 
@@ -26,15 +23,11 @@ A simple, lightweight system monitoring dashboard for Raspberry Pi.
 
 ## Set up
 
+PiDash requires Python 3.6 or above.
+
 ### Edit the config file
 
-Definitely change the default username, password, and secret key in `config.py` !
-
-### Add your current user to `video` group
-
-```bash
-sudo usermod -aG video $USER
-```
+Please change the default username and password in `config.py`.
 
 ### Run with a virtual environment
 
