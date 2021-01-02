@@ -25,7 +25,7 @@ def dashboard():
     if not logged_in():
         return to_login()
     # cpu percentage
-    cpu_percent = round(float(os.popen("grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}'").read()))
+    cpu_percent = round(float(os.popen("/bin/grep 'cpu ' /proc/stat | /usr/bin/awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage}'").read()))
     # current cpu frequency
     cpu_freq = round(float(os.popen("/bin/cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq").read())/1000000, 2)
     # cpu max frequency
@@ -33,13 +33,13 @@ def dashboard():
     # cpu temperature
     cpu_temp = round(float(os.popen("/bin/cat /sys/class/thermal/thermal_zone0/temp").read())/1000)
     # total/free/used memory
-    ram_total = round(int(os.popen("grep 'MemTotal: ' /proc/meminfo | awk '{total=$2} END {print total}'").read())/1000)
-    ram_free = round(int(os.popen("grep 'MemFree: ' /proc/meminfo | awk '{free=$2} END {print free}'").read())/1000)
+    ram_total = round(int(os.popen("/bin/grep 'MemTotal: ' /proc/meminfo | /usr/bin/awk '{total=$2} END {print total}'").read())/1000)
+    ram_free = round(int(os.popen("/bin/grep 'MemAvailable: ' /proc/meminfo | /usr/bin/awk '{free=$2} END {print free}'").read())/1000)
     ram_used = ram_total - ram_free
     ram_percent = round(ram_used / ram_total * 100)
     # uptime
-    up_since = os.popen("uptime -s").read()
-    up_for = os.popen("uptime -p").read()
+    up_since = os.popen("/usr/bin/uptime -s").read()
+    up_for = os.popen("/usr/bin/uptime -p").read()
     info = {'cpu_percent': cpu_percent,
             'cpu_freq': cpu_freq,
             'cpu_max': cpu_max,
@@ -59,7 +59,7 @@ def ifconfig():
     # check login status
     if not logged_in():
         return to_login()
-    result = os.popen('ifconfig')
+    result = os.popen('/sbin/ifconfig')
     response = make_response(result.read())
     response.headers["content-type"] = "text/plain"
     return response
@@ -71,7 +71,7 @@ def ps_list():
     # check login status
     if not logged_in():
         return to_login()
-    result = os.popen('ps -aux')
+    result = os.popen('/bin/ps -aux')
     response = make_response(result.read())
     response.headers["content-type"] = "text/plain"
     return response
