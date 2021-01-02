@@ -1,5 +1,7 @@
 # PiDash <!-- omit in toc -->
 
+[![CodeFactor](https://www.codefactor.io/repository/github/chrisx8/pidash/badge)](https://www.codefactor.io/repository/github/chrisx8/pidash)
+
 A simple, lightweight system monitoring dashboard for Raspberry Pi.
 
 ![Screenshot](screenshot.png)
