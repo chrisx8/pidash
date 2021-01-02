@@ -24,9 +24,3 @@ csrf.init_app(app)
 
 # import all views
 import views
-
-
-# serve static files
-@app.route('/static/<path:path>')
-def send_static(path):
-    return send_from_directory('static', path)
