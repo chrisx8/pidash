@@ -37,17 +37,17 @@ Run the following on your Raspberry Pi
 
 ```bash
 # Clone project source from Git
-git clone https://github.com/chrisx8/raspberrypi-dashboard.git
-cd raspberrypi-dashboard
+git clone https://github.com/chrisx8/pidash.git
+cd pidash
 
 # Install pip before continuing
 sudo apt-get install python3-pip
 
 # Install virtualenv
-pip install --user virtualenv
+pip3 install --user virtualenv
 
 # Create a virtual environment
-virtualenv venv
+python3 -m virtualenv venv
 
 # Activate environment
 source venv/bin/activate
@@ -71,13 +71,13 @@ gunicorn wsgi:app -b 0.0.0.0:58000
     ```
 - Step 2: Configure
 
-    Edit `/etc/supervisor/conf.d/raspberrypi-dashboard.conf` with your favorite text editor (such as `nano` or `vi`)
+    Edit `/etc/supervisor/conf.d/pidash.conf` with a text editor (such as `nano` or `vim`)
 
     Paste the following into the file:
     ```
     [program:raspberrypi-dashboard]
-    command=/path/to/raspberrypi-dashboard/venv/bin/gunicorn wsgi:app -b 0.0.0.0:58000
-    directory=/path/to/raspberrypi-dashboard
+    command=/path/to/pidash/venv/bin/gunicorn wsgi:app -b 0.0.0.0:58000
+    directory=/path/to/pidash
     autostart=true
     autorestart=true
     startretries=3
