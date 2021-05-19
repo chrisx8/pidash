@@ -3,7 +3,7 @@ Flask==2.0.0
 Flask-WTF==0.14.3
 gunicorn==20.1.0
 itsdangerous==2.0.0
-Jinja2==3.0.0
+Jinja2==3.0.1
 MarkupSafe==2.0.0
 Werkzeug==2.0.1
 WTForms==2.3.3
