@@ -8,13 +8,13 @@
 <h5>CPU Usage</h5>
 <div class="progress">
 {% if info['cpu_percent'] >= 85 %}
-<div class="progress-bar bg-danger" role="progressbar" style="width: {{ info['cpu_percent'] }}%" 
+<div class="progress-bar bg-danger" role="progressbar" style="width: {{ info['cpu_percent'] }}%"
 aria-valuenow="{{ info['cpu_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_percent'] }}%</div>
 {% elif info['cpu_percent'] >= 70 %}
-<div class="progress-bar bg-warning" role="progressbar" style="width: {{ info['cpu_percent'] }}%" 
+<div class="progress-bar bg-warning" role="progressbar" style="width: {{ info['cpu_percent'] }}%"
 aria-valuenow="{{ info['cpu_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_percent'] }}%</div>
 {% else %}
-<div class="progress-bar bg-info" role="progressbar" style="width: {{ info['cpu_percent'] }}%" 
+<div class="progress-bar bg-info" role="progressbar" style="width: {{ info['cpu_percent'] }}%"
 aria-valuenow="{{ info['cpu_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_percent'] }}%</div>
 {% endif %}
 </div>
@@ -24,13 +24,13 @@ aria-valuenow="{{ info['cpu_percent'] }}" aria-valuemin="0" aria-valuemax="100">
 <h5>CPU Temperature</h5>
 <div class="progress">
 {% if info['cpu_temp'] >= 85 %}
-<div class="progress-bar bg-danger" role="progressbar" style="width: {{ info['cpu_temp'] }}%" 
+<div class="progress-bar bg-danger" role="progressbar" style="width: {{ info['cpu_temp'] }}%"
 aria-valuenow="{{ info['cpu_temp'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_temp'] }}'C</div>
 {% elif info['cpu_temp'] >= 70 %}
-<div class="progress-bar bg-warning" role="progressbar" style="width: {{ info['cpu_temp'] }}%" 
+<div class="progress-bar bg-warning" role="progressbar" style="width: {{ info['cpu_temp'] }}%"
 aria-valuenow="{{ info['cpu_temp'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_temp'] }}'C</div>
 {% else %}
-<div class="progress-bar bg-info" role="progressbar" style="width: {{ info['cpu_temp'] }}%" 
+<div class="progress-bar bg-info" role="progressbar" style="width: {{ info['cpu_temp'] }}%"
 aria-valuenow="{{ info['cpu_temp'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['cpu_temp'] }}'C</div>
 {% endif %}
 </div>
@@ -42,13 +42,13 @@ aria-valuenow="{{ info['cpu_temp'] }}" aria-valuemin="0" aria-valuemax="100">{{ 
 <h5>Memory Usage</h5>
 <div class="progress">
 {% if info['ram_percent'] >= 85 %}
-<div class="progress-bar bg-danger" role="progressbar" style="width: {{ info['ram_percent'] }}%" 
+<div class="progress-bar bg-danger" role="progressbar" style="width: {{ info['ram_percent'] }}%"
 aria-valuenow="{{ info['ram_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['ram_percent'] }}%</div>
 {% elif info['ram_percent'] >= 70 %}
-<div class="progress-bar bg-warning" role="progressbar" style="width: {{ info['ram_percent'] }}%" 
+<div class="progress-bar bg-warning" role="progressbar" style="width: {{ info['ram_percent'] }}%"
 aria-valuenow="{{ info['ram_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['ram_percent'] }}%</div>
 {% else %}
-<div class="progress-bar bg-info" role="progressbar" style="width: {{ info['ram_percent'] }}%" 
+<div class="progress-bar bg-info" role="progressbar" style="width: {{ info['ram_percent'] }}%"
 aria-valuenow="{{ info['ram_percent'] }}" aria-valuemin="0" aria-valuemax="100">{{ info['ram_percent'] }}%</div>
 {% endif %}
 </div>
@@ -72,6 +72,6 @@ System up since {{ info['up_since'] }} - {{ info['up_for'] }}
 <h4>System</h4>
 <p style="font-size:14pt">
 <a href="system/ps/">Processes</a><br>
-</p>             
+</p>
 </div>
 {% endblock %}
