@@ -3,7 +3,8 @@ from wsgi import app
 from config import URL_PREFIX, USERNAME, PASSWORD
 import os
 
-HOSTNAME = os.popen('/bin/cat /etc/hostname').read()
+with open('/etc/hostname', 'r') as f:
+    HOSTNAME = f.read()
 
 
 def logged_in():
@@ -83,7 +84,6 @@ def login():
         # credentials correct
         if request.form['username'] == USERNAME and request.form['password'] == PASSWORD:
             session['logged_in'] = True
-            flash('Welcome, '+USERNAME, 'success')
             return redirect(URL_PREFIX+'/')
         # bad credentials
         flash('Invalid credentials!', 'danger')
@@ -92,7 +92,5 @@ def login():
 
 @app.route('/logout/')
 def logout():
-    if not logged_in():
-        return to_login()
     session['logged_in'] = False
-    return render_template('logout.html', HOSTNAME=HOSTNAME, URL_PREFIX=URL_PREFIX, logged_in=logged_in())
+    return to_login()
