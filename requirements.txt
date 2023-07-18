@@ -1,6 +1,6 @@
 Flask==2.3.2
 Flask-WTF==1.1.1
-gunicorn==20.1.0
+gunicorn==21.0.1
 ## The following requirements were added by pip freeze:
 blinker==1.6.2
 click==8.1.5
