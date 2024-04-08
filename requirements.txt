@@ -1,4 +1,4 @@
-Flask==3.0.2
+Flask==3.0.3
 Flask-WTF==1.2.1
 gunicorn==21.2.0
 ## The following requirements were added by pip freeze:
