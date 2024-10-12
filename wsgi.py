@@ -1,8 +1,8 @@
-from flask import Flask, send_from_directory
-from flask_wtf.csrf import CSRFProtect
-import os
 import secrets
 import string
+
+from flask import Flask
+from flask_wtf.csrf import CSRFProtect
 
 
 # create a random SECRET KEY
@@ -16,11 +16,11 @@ def create_secret_key(length):
 
 # Create app and load secret key
 app = Flask(__name__)
-app.config['SECRET_KEY'] = create_secret_key(64)
+app.config["SECRET_KEY"] = create_secret_key(64)
 
 # initialize csrf protection
 csrf = CSRFProtect()
 csrf.init_app(app)
 
 # import all views
-import views
+import views  # noqa F401
