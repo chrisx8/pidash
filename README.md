@@ -23,7 +23,7 @@ A simple, lightweight system monitoring dashboard for Raspberry Pi.
 
 ## Set up
 
-PiDash requires Python 3.6 or above.
+PiDash requires Python 3.10 or above.
 
 ### Edit the config file
 
