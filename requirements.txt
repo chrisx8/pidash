@@ -2,7 +2,7 @@ Flask==3.0.3
 Flask-WTF==1.2.2
 gunicorn==23.0.0
 ## The following requirements were added by pip freeze:
-blinker==1.8.2
+blinker==1.9.0
 click==8.1.7
 itsdangerous==2.2.0
 Jinja2==3.1.4
